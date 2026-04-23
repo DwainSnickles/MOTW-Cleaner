@@ -1,5 +1,5 @@
 # MOTW Cleaner
- 
+https://github.com/DwainSnickles/MOTW-Cleaner/blob/master/images/logo.png
 MOTW app — Windows Mark of the Web Cleaner (Drag. Drop. Done.) Folder & ZIP File MOTW  Cleaner — Media Kit 2026
 Version 1.0
 “Remove Windows Mark of the Web security blocks instantly. Drag. Drop. Done.”
