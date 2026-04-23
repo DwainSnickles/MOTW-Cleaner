@@ -43,17 +43,7 @@ Open After Cleaning	Automatically opens the target folder in Explorer after the 
 Live Progress Bar	Real-time visual feedback during ZIP extraction and file processing
 Operation Log Panel	Detailed, scrollable log of every action taken — see exactly what was cleaned
 
-Use Cases
-●	Developers downloading GitHub repositories, NuGet packages, or SDKs that arrive with MOTW flags blocking compilation
-
-●	IT Administrators deploying software packages across enterprise machines where blocked files cause installation failures
-
-●	Power Users managing large batches of downloads from browsers, cloud storage, or email attachments
-
-●	Anyone tired of right-clicking Properties → Unblock on every single file, one at a time
-
-
-
+![MOTW Cleaner UI](images/SysRequirements.png)
 
 Screenshots & Workflow Gallery
 The following screenshots illustrate MOTW app’s complete workflow — from the initial interface, through the problem it solves, the cleaning process, and the verified result.
