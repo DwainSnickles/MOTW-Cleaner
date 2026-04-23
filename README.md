@@ -1,3 +1,9 @@
+## 📥 Download MOTW Cleaner
+
+<a href="https://github.com/DwainSnickles/MOTW-Cleaner/releases/latest/download/MOTW%20Cleaner.exe">
+  <img src="https://img.shields.io/badge/Download-MOTW_Cleaner-blue?style=for-the-badge">
+</a>
+
 # MOTW Cleaner
 
 💡![MOTW Cleaner UI](images/page1.png)
