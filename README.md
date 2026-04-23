@@ -27,8 +27,7 @@ MOTW app eliminates this problem entirely with a clean, purpose-built interface 
 ●	Real-time progress bar and detailed activity log — always know what’s happening
 ●	Auto-open cleaned folders after processing — jump straight into your work
 
-💡 How It Works
-Drag a folder or ZIP file onto MOTW app → It scans and removes all Zone.Identifier alternate data streams → Your files are fully unblocked and ready to use. That’s it. Drag. Drop. Done.
+💡![MOTW Cleaner UI](images/HowItWorks.png)
 
 Key Features
 
