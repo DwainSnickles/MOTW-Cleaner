@@ -32,6 +32,8 @@ Drag a folder or ZIP file onto MOTW app → It scans and removes all Zone.Identi
 
 Key Features
 
+![MOTW Cleaner UI](images/Features.png)
+
 Feature	Description
 Drag & Drop Uploader	Drop any folder or ZIP file directly onto the app window to begin cleaning instantly
 Select Folder Button	Browse and select any folder on your system for MOTW cleaning
@@ -43,13 +45,14 @@ Operation Log Panel	Detailed, scrollable log of every action taken — see exact
 
 Use Cases
 ●	Developers downloading GitHub repositories, NuGet packages, or SDKs that arrive with MOTW flags blocking compilation
-●	IT Administrators deploying software packages across enterprise machines where blocked files cause installation failures
-●	Power Users managing large batches of downloads from browsers, cloud storage, or email attachments
-●	Anyone tired of right-clicking Properties → Unblock on every single file, one at a time
-System Requirements
 
-Operating System	Windows 10 or later
-Runtime	.NET 4.72 Runtime
+●	IT Administrators deploying software packages across enterprise machines where blocked files cause installation failures
+
+●	Power Users managing large batches of downloads from browsers, cloud storage, or email attachments
+
+●	Anyone tired of right-clicking Properties → Unblock on every single file, one at a time
+
+
 
 
 Screenshots & Workflow Gallery
