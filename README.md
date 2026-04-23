@@ -1,5 +1,6 @@
+![MOTW Cleaner UI](images/logo.png)
 # MOTW Cleaner
-https://github.com/DwainSnickles/MOTW-Cleaner/blob/master/images/logo.png
+
 MOTW app — Windows Mark of the Web Cleaner (Drag. Drop. Done.) Folder & ZIP File MOTW  Cleaner — Media Kit 2026
 Version 1.0
 “Remove Windows Mark of the Web security blocks instantly. Drag. Drop. Done.”
@@ -57,10 +58,11 @@ The following screenshots illustrate MOTW app’s complete workflow — from the
  
 Figure 1: The MOTW app main interface features a clean, intuitive layout with drag-and-drop support, folder/ZIP selection buttons, and configurable options for recursive processing.
 
-
-
+![MOTW Cleaner UI](images/Main.png)
 
 2. Extraction in Progress
+
+![MOTW Cleaner UI](images/Extract.png)
  
 Figure 3: MOTW app automatically extracts ZIP archives and cleans MOTW flags simultaneously, with a real-time progress bar showing extraction status at 31%.
 3. Cleaning Complete 
