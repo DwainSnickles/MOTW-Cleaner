@@ -4,7 +4,7 @@
   <img src="https://img.shields.io/badge/Download-MOTW_Cleaner-blue?style=for-the-badge">
 </a>
 
-[![View Upgrade Notes](https://img.shields.io/badge/Upgrade%20Notes-HTML-blue?style=for-the-badge)](https://dwainsnickles.github.io/MOTW-Cleaner/)
+[![What's New](https://img.shields.io/badge/Upgrade%20Notes-HTML-blue?style=for-the-badge)](https://dwainsnickles.github.io/MOTW-Cleaner/)
 
 
 # MOTW Cleaner
