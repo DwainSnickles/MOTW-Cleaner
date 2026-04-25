@@ -1,4 +1,5 @@
-## 📥 What New Version 1.2
+## 📄 View What's New
+
 [![View What's New](https://img.shields.io/badge/Whats%20New-HTML-blue?style=for-the-badge)](https://dwainsnickles.github.io/MOTW-Cleaner/)
 
 ## 📥 Download MOTW Cleaner
