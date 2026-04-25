@@ -1,5 +1,6 @@
-# For comments, Help or improvements use button below
-<a href="mailto:dwainsnickles@hotmail.com" class="support-btn">
+<p>For comments, help, or improvements, use the button below:</p>
+
+<a href="mailto:dwains102@hotmail.com" class="support-btn">
     📧 Contact Support
 </a>
 
