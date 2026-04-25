@@ -2,7 +2,7 @@
 
 [![View What's New](https://img.shields.io/badge/Whats%20New-HTML-blue?style=for-the-badge)](https://dwainsnickles.github.io/MOTW-Cleaner/)
 
-## 📥 Download MOTW Cleaner Versiopn 1.2
+## 📥 Download MOTW Cleaner Version 1.2
 
 <a href="https://github.com/DwainSnickles/MOTW-Cleaner/releases/download/v1.0.0/MOTW_Setup.exe">
   <img src="https://img.shields.io/badge/Download-MOTW_Cleaner-blue?style=for-the-badge">
