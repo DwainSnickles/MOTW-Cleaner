@@ -1,9 +1,7 @@
 <p>For comments, help, or improvements, use the button below:</p>
 
-<a href="mailto:dwains102@hotmail.com" class="support-btn">
-    📧 Contact Support
-</a>
-
+## 📧 Email Requests
+[![Email Requests](https://img.shields.io/badge/Email%20Requests-Contact-blue?style=for-the-badge)](mailto:dwainsnickles@hotmail.com)
 ## 📄 View What's New
 
 [![View What's New](https://img.shields.io/badge/Whats%20New-HTML-blue?style=for-the-badge)](https://dwainsnickles.github.io/MOTW-Cleaner/)
