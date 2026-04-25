@@ -4,7 +4,9 @@
   <img src="https://img.shields.io/badge/Download-MOTW_Cleaner-blue?style=for-the-badge">
 </a>
 
-[![View Upgrade Notes](https://img.shields.io/badge/Upgrade%20Notes-HTML-blue?style=for-the-badge)](https://htmlpreview.github.io/?https://github.com/DwainSnickles/MOTW-Cleaner/blob/master/Update%20Note%20Files/MOTW%20Cleaner%20-%20Upgrade%20Overview.htm)
+
+[![View Upgrade Notes](https://img.shields.io/badge/Upgrade%20Notes-HTML-blue?style=for-the-badge)](https://htmlpreview.github.io/?https://github.com/DwainSnickles/MOTW-Cleaner/blob/master/Update%20Notes/index.htm)
+
 
 # MOTW Cleaner
 
