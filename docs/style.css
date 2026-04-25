@@ -1,0 +1,123 @@
+/* ================================
+   MOTW Cleaner — Global Layout
+   ================================ */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fa;
+    color: #222;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.08);
+}
+
+/* ================================
+   Headings
+   ================================ */
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: #0a4b8f;
+}
+
+.subtitle {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.version {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 30px;
+}
+
+h2 {
+    font-size: 26px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    color: #0a4b8f;
+}
+
+/* ================================
+   Paragraphs & Lists
+   ================================ */
+
+p {
+    margin-bottom: 15px;
+}
+
+ul {
+    margin-top: 10px;
+    margin-bottom: 25px;
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+/* ================================
+   Full-size Image Under Headings
+   ================================ */
+
+.shell-image {
+    display: block;
+    width: 100%;
+    max-width: 170px; /* matches your 170x36 banner */
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+/* ================================
+   Support Button
+   ================================ */
+
+.support-btn {
+    display: inline-block;
+    background: #0a4b8f;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    margin-top: 15px;
+    transition: background 0.2s ease;
+}
+
+.support-btn:hover {
+    background: #083b72;
+}
+
+/* ================================
+   Optional Icon Class
+   ================================ */
+
+.icon {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+/* ================================
+   Footer
+   ================================ */
+
+footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 13px;
+    color: #777;
+}
