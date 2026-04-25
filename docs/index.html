@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MOTW Cleaner – Upgrade Overview</title>
+<title>MOTW Cleaner — Upgrade Overview</title>
 
 <style>
     body {
@@ -13,13 +13,6 @@
         padding: 0;
         line-height: 1.6;
         color: #222;
-    }
-
-    header {
-        background: #0078ff;
-        color: white;
-        padding: 20px;
-        text-align: center;
     }
 
     .container {
@@ -50,6 +43,10 @@
         background: #005fcc;
     }
 
+    ul {
+        margin-left: 20px;
+    }
+
     footer {
         text-align: center;
         margin: 40px 0 20px;
@@ -65,49 +62,80 @@
     <a class="button" href="https://github.com/DwainSnickles/MOTW-Cleaner">⬅ Return to Home</a>
 </div>
 
-<header>
-    <h1>MOTW Cleaner – Upgrade Overview</h1>
-</header>
-
 <div class="container">
 
-    <h2>What’s New</h2>
-    <p>
-        This upgrade introduces major improvements to stability, UI responsiveness, and overall workflow.
-        MOTW Cleaner now performs faster, handles edge cases more reliably, and includes a cleaner interface.
-    </p>
+<h1>MOTW Cleaner — Upgrade Overview</h1>
+<p><strong>Version 2.0 | April 2026</strong></p>
 
-    <h2>Key Enhancements</h2>
-    <ul>
-        <li>Improved UI layout and responsiveness</li>
-        <li>Better handling of MOTW removal across multiple file types</li>
-        <li>Optimized scanning and processing engine</li>
-        <li>Cleaner logging and status reporting</li>
-        <li>Reduced memory usage and improved performance</li>
-    </ul>
+<h2>1. Windows Shell Integration</h2>
+<p>
+The upgraded MOTW Cleaner now integrates directly with the Windows shell, enabling users to right-click files or folders in Windows Explorer and instantly invoke MOTW cleaning operations. This removes the need to drag-and-drop or manually open the application for every task, providing a seamless, native-feeling workflow.
+</p>
 
-    <h2>Visual Improvements</h2>
-    <p>
-        The interface has been refined for clarity and ease of use.  
-        Screenshots in the README show the updated workflow and UI enhancements.
-    </p>
+<ul>
+    <li>Right-click context menu entries for individual files and folders</li>
+    <li>"Clean MOTW" and "Scan for MOTW" options appear directly in the Windows Explorer context menu</li>
+    <li>Supports single-file and batch (folder-level) operations from Explorer</li>
+    <li>Integrates cleanly with Windows 10 and Windows 11 shell extension APIs</li>
+    <li>Can be enabled or disabled from within the application settings</li>
+</ul>
 
-    <h2>Stability Fixes</h2>
-    <p>
-        Several crash scenarios were eliminated, especially around large directory scans and
-        files with unusual metadata. The new engine is significantly more resilient.
-    </p>
+<h2>2. Settings Persistence</h2>
+<p>
+User preferences and configuration are now saved and restored automatically between sessions. Previously, settings would reset on every launch — the new persistence layer ensures your workflow stays exactly as you configured it.
+</p>
 
-    <h2>Future Plans</h2>
-    <p>
-        Additional features are planned, including:
-    </p>
-    <ul>
-        <li>Optional auto-clean mode</li>
-        <li>Extended logging options</li>
-        <li>More detailed reporting</li>
-        <li>UI theme customization</li>
-    </ul>
+<ul>
+    <li>All user preferences (scan options, display settings, default paths) are saved to a local configuration file</li>
+    <li>Settings are restored automatically on application startup</li>
+    <li>Supports export and import of settings profiles for backup or sharing across machines</li>
+    <li>Graceful fallback to defaults if the configuration file is missing or corrupted</li>
+    <li>No registry modifications — all settings use portable, file-based storage</li>
+</ul>
+
+<h2>3. Centralized ShellIntegration Engine</h2>
+<p>
+Under the hood, all shell-related functionality has been consolidated into a single, centralized ShellIntegration engine. This architectural improvement simplifies maintenance, reduces code duplication, and ensures consistent behavior across all shell entry points.
+</p>
+
+<ul>
+    <li>Single engine class manages all shell registration, unregistration, and invocation logic</li>
+    <li>Eliminates scattered shell calls — all shell operations routed through one clean API</li>
+    <li>Easier to extend with new shell actions (e.g., future "Pin to Quick Access" or drag-and-drop handlers)</li>
+    <li>Improved error handling and logging for shell operations</li>
+    <li>Modular design allows the engine to be tested and updated independently</li>
+</ul>
+
+<h2>4. Improved Tooltips</h2>
+<p>
+Tooltips throughout the application have been redesigned for clarity and usefulness. Every interactive element now provides context-sensitive guidance, helping both new and experienced users understand available actions at a glance.
+</p>
+
+<ul>
+    <li>Tooltips added or improved for all toolbar buttons, menu items, and status indicators</li>
+    <li>Context-sensitive content — tooltips adapt based on the current application state</li>
+    <li>Consistent formatting and timing across the entire UI</li>
+    <li>Reduced visual clutter — tooltips appear only when genuinely helpful</li>
+    <li>Supports accessibility readers for improved screen-reader compatibility</li>
+</ul>
+
+<h2>5. Stability Improvements</h2>
+<p>
+This release includes a range of stability and reliability improvements. Edge cases, error handling, and resource management have all been tightened to deliver a more resilient application experience.
+</p>
+
+<ul>
+    <li>Fixed potential crash when processing files with unusual or very long path names</li>
+    <li>Improved handling of locked or in-use files during batch operations</li>
+    <li>Reduced memory footprint during large folder scans</li>
+    <li>Better exception handling and user-friendly error messages throughout</li>
+    <li>Addressed UI thread-blocking issues for smoother responsiveness during heavy operations</li>
+    <li>Enhanced logging for easier troubleshooting and diagnostics</li>
+</ul>
+
+<p>
+This upgrade reflects a commitment to making MOTW Cleaner faster, more integrated, and more reliable. Whether you're cleaning a single download or batch-processing an entire folder tree, these improvements ensure a smoother, more professional experience.
+</p>
 
 </div>
 
@@ -117,7 +145,7 @@
 </div>
 
 <footer>
-    MOTW Cleaner – Upgrade Notes
+    MOTW Cleaner — Upgrade Overview
 </footer>
 
 </body>
