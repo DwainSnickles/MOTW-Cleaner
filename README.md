@@ -7,7 +7,7 @@
 
 [![View What's New](https://img.shields.io/badge/Whats%20New-HTML-blue?style=for-the-badge)](https://dwainsnickles.github.io/MOTW-Cleaner/)
 
-## 📥 Download MOTW Cleaner Version 1.2
+## 📥 Download and Install MOTW Cleaner Version 1.2 on your Windows PC.
 
 <a href="https://github.com/DwainSnickles/MOTW-Cleaner/releases/download/1.3.0/MOTW.Installer.msi">
   <img src="https://img.shields.io/badge/Download-MOTW_Cleaner-blue?style=for-the-badge">
