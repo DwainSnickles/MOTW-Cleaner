@@ -28,6 +28,11 @@ namespace MOTW_Cleaner
         public frmMOTW(string initialPath)
         {
             InitializeComponent();
+
+            // Show the build people are running in the title bar, e.g.
+            // "MOTW Folder and Zip file cleaner 1.3.2.0".
+            Text = $"{Text} {System.Windows.Forms.Application.ProductVersion.Split('+')[0]}";
+
             picDragDrop.AllowDrop = true;
             progressExtract.Visible = false;
             MotwUnblocker.Log = msg => lstLog.Items.Add(msg);

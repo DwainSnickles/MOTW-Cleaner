@@ -3,6 +3,6 @@
   <version>1.3.2.0</version>
   <url>https://github.com/DwainSnickles/MOTW-Cleaner/releases/download/1.3.2.0/MOTW.Installer.msi</url>
   <changelog>https://github.com/DwainSnickles/MOTW-Cleaner/blob/master/version.txt</changelog>
-  <checksum algorithm="SHA256">C9BB9CF2733395C6CF9C679C7B530EF7436ECADF1169CE6792B0755AAE669B95</checksum>
+  <checksum algorithm="SHA256">657272FD2281CD044CBDEFEF7AFDD30C13901EF971E3A0C4CAABA6B80D3761A4</checksum>
   <mandatory>false</mandatory>
 </item>

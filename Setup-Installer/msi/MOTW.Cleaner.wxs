@@ -16,7 +16,7 @@
   <Package Name="MOTW Cleaner"
            Manufacturer="Dwain Snickles"
            Version="1.3.2.0"
-           UpgradeCode="{E5A7B8C9-1D2E-4F3A-9B4C-6D8E0F2A4B50}"
+           UpgradeCode="{48969108-2635-4FE2-80AB-A7BFF2749C65}"
            Scope="perMachine"
            Compressed="yes"
            Language="1033">
@@ -24,8 +24,43 @@
     <SummaryInformation Description="MOTW Cleaner setup - unblock Mark of the Web on downloaded files"
                         Manufacturer="Dwain Snickles" />
 
-    <MajorUpgrade DowngradeErrorMessage="A newer version of MOTW Cleaner is already installed." />
+    <!-- AllowSameVersionUpgrades lets a rebuild of the same version replace the
+         earlier build instead of registering a second copy alongside it. -->
+    <MajorUpgrade DowngradeErrorMessage="A newer version of MOTW Cleaner is already installed."
+                  Schedule="afterInstallValidate"
+                  AllowSameVersionUpgrades="yes" />
     <MediaTemplate EmbedCab="yes" />
+
+    <!--
+      The released 1.3.1.0 package (32-bit, product {FFBAC566-...}) installed to a
+      folder of its choice and recorded it as ARP InstallLocation. Read that back so
+      the upgrade replaces the app where it already lives instead of installing a
+      second copy under Program Files. With nothing to read, INSTALLDIR keeps its
+      Program Files default.
+    -->
+    <Property Id="PREVINSTALLDIR">
+      <RegistrySearch Id="PreviousInstallDir" Root="HKLM" Bitness="always32"
+                      Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FFBAC566-A7D0-4947-BCB6-3C01CE30AFBA}"
+                      Name="InstallLocation" Type="raw" />
+    </Property>
+    <SetProperty Id="INSTALLDIR" Action="SetInstallDirFromPreviousProduct"
+                 Value="[PREVINSTALLDIR]"
+                 Before="CostFinalize"
+                 Condition="PREVINSTALLDIR" />
+
+    <!--
+      From 1.3.2.0 on the folder is remembered under our own key, so the next
+      release keeps upgrading into it without depending on any one ProductCode.
+    -->
+    <Property Id="PREVAPPDIR">
+      <RegistrySearch Id="PreviousAppDir" Root="HKLM"
+                      Key="SOFTWARE\MOTW Cleaner"
+                      Name="InstallDir" Type="raw" />
+    </Property>
+    <SetProperty Id="INSTALLDIR" Action="SetInstallDirFromAppKey"
+                 Value="[PREVAPPDIR]"
+                 Before="CostFinalize"
+                 Condition="PREVAPPDIR AND NOT PREVINSTALLDIR" />
 
     <Icon Id="MOTW.ico" SourceFile="assets\motw.ico" />
     <Property Id="ARPPRODUCTICON" Value="MOTW.ico" />
@@ -79,6 +114,12 @@
       </Component>
     </StandardDirectory>
 
+    <Component Id="InstallLocation" Directory="INSTALLDIR" Guid="{E5A7B9C0-2D3E-4F41-8B5C-7D9E1F3A4B51}">
+      <RegistryKey Root="HKLM" Key="Software\MOTW Cleaner">
+        <RegistryValue Name="InstallDir" Type="string" Value="[INSTALLDIR]" KeyPath="yes" />
+      </RegistryKey>
+    </Component>
+
     <Component Id="AppPaths" Directory="INSTALLDIR" Guid="{D4F6A7B8-9C1D-4E2F-8A3B-5C7D9E1F3A40}">
       <RegistryKey Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\App Paths\MOTW Cleaner.exe">
         <RegistryValue Type="string" Value="[INSTALLDIR]MOTW Cleaner.exe" />
@@ -90,6 +131,7 @@
       <ComponentRef Id="ApplicationFiles" />
       <ComponentRef Id="StartMenuShortcut" />
       <ComponentRef Id="DesktopShortcut" />
+      <ComponentRef Id="InstallLocation" />
       <ComponentRef Id="AppPaths" />
     </Feature>
 
