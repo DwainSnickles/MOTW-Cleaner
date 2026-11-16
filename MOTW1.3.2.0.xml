@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<item>
+  <version>1.3.2.0</version>
+  <url>https://github.com/DwainSnickles/MOTW-Cleaner/releases/download/1.3.2.0/MOTW.Installer.msi</url>
+  <changelog>https://github.com/DwainSnickles/MOTW-Cleaner/blob/master/version.txt</changelog>
+  <checksum algorithm="SHA256">BB89FBBA2A33D8C686BF8AE1FE0B7F1B9E9239B4E9197118684C5781186F370B</checksum>
+  <mandatory>false</mandatory>
+</item>

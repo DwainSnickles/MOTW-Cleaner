@@ -100,7 +100,7 @@ Draw-Tracked -Graphics $g -Text "MOTW CLEANER" -Font $titleFont -Color ([System.
 $titleFont.Dispose()
 
 $subFont = New-Object System.Drawing.Font "Consolas", 6.8, ([System.Drawing.FontStyle]::Regular), ([System.Drawing.GraphicsUnit]::Point)
-Draw-Tracked -Graphics $g -Text "MSI DEPLOYMENT  |  v1.3.1.0" -Font $subFont -Color ([System.Drawing.Color]::FromArgb(255, 118, 144, 162)) -X 59 -Y 34 -Tracking 1.1
+Draw-Tracked -Graphics $g -Text "MSI DEPLOYMENT  |  v1.3.2.0" -Font $subFont -Color ([System.Drawing.Color]::FromArgb(255, 118, 144, 162)) -X 59 -Y 34 -Tracking 1.1
 $subFont.Dispose()
 
 $chipFont = New-Object System.Drawing.Font "Consolas", 6.4, ([System.Drawing.FontStyle]::Regular), ([System.Drawing.GraphicsUnit]::Point)

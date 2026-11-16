@@ -1,6 +1,6 @@
 # MOTW Cleaner — Setup Installer
 
-A custom setup utility for [MOTW Cleaner](https://github.com/DwainSnickles/MOTW-Cleaner) 1.3.1.0.
+A custom setup utility for [MOTW Cleaner](https://github.com/DwainSnickles/MOTW-Cleaner) 1.3.2.0.
 It is a borderless, custom-painted "HUD" wizard written against **.NET Framework 4.8** with
 **no NuGet packages and no third-party installer engine**, so the build only needs the .NET SDK.
 

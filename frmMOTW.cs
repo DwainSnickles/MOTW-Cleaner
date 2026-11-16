@@ -18,15 +18,39 @@ namespace MOTW_Cleaner
 {
     public partial class frmMOTW : Form
     {
-        public frmMOTW()
+        private string pendingInitialPath;
+        private readonly bool closeAfterDrop;
+
+        public frmMOTW() : this(null)
+        {
+        }
+
+        public frmMOTW(string initialPath)
         {
             InitializeComponent();
             picDragDrop.AllowDrop = true;
             progressExtract.Visible = false;
             MotwUnblocker.Log = msg => lstLog.Items.Add(msg);
+            pendingInitialPath = initialPath;
+
+            // Launched from a shell drop (a path on the command line): clean it, show
+            // the folder and then quit instead of sitting in the background.
+            closeAfterDrop = !string.IsNullOrWhiteSpace(initialPath);
             // Hook mouse enter for the entire form and all children
             //HookMouseEnterRecursive(this);
             //this.MouseEnter += (s, e) => this.BringToFront();
+        }
+
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+
+            if (string.IsNullOrWhiteSpace(pendingInitialPath))
+                return;
+
+            string path = pendingInitialPath;
+            pendingInitialPath = null;
+            ProcessDroppedPath(path);
         }
 
         //protected override void WndProc(ref Message m)
@@ -201,52 +225,150 @@ namespace MOTW_Cleaner
         #endregion
         #region All Drag and Drop Methods
 
-        private async void picDragDrop_DragDrop(object sender, DragEventArgs e)
+        private void picDragDrop_DragDrop(object sender, DragEventArgs e)
         {
             picDragDrop.BackColor = SystemColors.Control;
-            
+
             var dropped = (string[])e.Data.GetData(DataFormats.FileDrop);
             if (dropped == null || dropped.Length == 0)
                 return;
 
-            string path = dropped[0];
+            ProcessDroppedPath(dropped[0]);
+        }
 
-            // ZIP dropped
-            if (File.Exists(path) &&
-                Path.GetExtension(path).Equals(".zip", StringComparison.OrdinalIgnoreCase))
+        private const string UpdateVersionUrl = "https://raw.githubusercontent.com/DwainSnickles/MOTW-Cleaner/master/version.txt";
+        private const string UpdateDownloadUrl = "https://github.com/DwainSnickles/MOTW-Cleaner/releases/latest";
+
+        private bool updateCheckStarted;
+
+        /// <summary>
+        /// Starts the update check for this session without blocking the caller.
+        /// Only the first drop performs the lookup; later drops skip it.
+        /// </summary>
+        private void QueueUpdateCheck()
+        {
+            if (updateCheckStarted)
+                return;
+
+            updateCheckStarted = true;
+
+            // Fire and forget: the drop is processed while this runs.
+            var ignored = CheckForUpdateAsync();
+        }
+
+        /// <summary>
+        /// Compares the running version with version.txt in the repository on a
+        /// background thread and offers the newest installer. Offline or failed
+        /// lookups are ignored so dropping something still works without a connection.
+        /// </summary>
+        private async Task CheckForUpdateAsync()
+        {
+            Version current;
+            if (!Version.TryParse(System.Windows.Forms.Application.ProductVersion.Split('+')[0], out current))
+                current = new Version(1, 0);
+
+            string raw;
+            try
             {
-                HandleZipDrop(path);
+                raw = await Task.Run(() => DownloadLatestVersion());
+            }
+            catch
+            {
+                return; // offline or GitHub unreachable: just carry on
+            }
+
+            Version latest;
+            if (!Version.TryParse((raw ?? string.Empty).Trim().Split('+')[0], out latest))
+                return;
+
+            if (latest <= current)
+                return;
+
+            try
+            {
+                if (IsDisposed || !IsHandleCreated)
+                    return;
+
+                BeginInvoke(new Action(() => OfferUpdate(latest, current)));
+            }
+            catch (InvalidOperationException)
+            {
+                // form went away while the lookup was running
+            }
+        }
+
+        private static string DownloadLatestVersion()
+        {
+            var request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(UpdateVersionUrl);
+            request.Timeout = 4000;
+            request.ReadWriteTimeout = 4000;
+            request.UserAgent = "MOTW-Cleaner";
+
+            using (var response = request.GetResponse())
+            using (var reader = new StreamReader(response.GetResponseStream()))
+                return reader.ReadToEnd();
+        }
+
+        private void OfferUpdate(Version latest, Version current)
+        {
+            if (IsDisposed)
+                return;
+
+            lstLog.Items.Add($"Update available: {latest} (running {current})");
+
+            var answer = MessageBox.Show(
+                $"MOTW Cleaner {latest} is available. You are running {current}.\r\n\r\nDownload the new installer now?",
+                "MOTW Cleaner update",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Information);
+
+            if (answer == DialogResult.Yes)
+                Process.Start(UpdateDownloadUrl);
+        }
+
+        /// <summary>
+        /// Cleans whatever was dropped on the window or handed to the exe as a
+        /// command-line argument (a file, ZIP or folder dropped onto the icon)
+        /// and opens the folder it lives in when "Open Folder after cleaning" is set.
+        /// Nothing is extracted or created: a dropped ZIP is unblocked in place.
+        /// </summary>
+        public void ProcessDroppedPath(string path)
+        {
+            if (string.IsNullOrWhiteSpace(path))
+                return;
+
+            // Every drop starts the update check, which runs in the background
+            // and asks at most once per session. Processing carries on now.
+            QueueUpdateCheck();
+
+            // Folder dropped uses the folder itself; a dropped file (including a
+            // ZIP) uses the folder it lives in. Either way nothing is extracted, so
+            // no extra folder appears next to the dropped item.
+            string folder = Directory.Exists(path)
+                ? path
+                : (File.Exists(path) ? Path.GetDirectoryName(path) : null);
+
+            if (string.IsNullOrEmpty(folder) || !Directory.Exists(folder))
+            {
+                lstLog.Items.Add($"Dropped item not found: {path}");
+                ExitAfterDrop();
                 return;
             }
 
-            //ensure clean button is enabled
             btnClean.Enabled = true;
+            txtFolder.Text = folder;
 
-            // Folder dropped
-            if (Directory.Exists(path))
-            {
-                txtFolder.Text = path;
-                lstLog.Items.Add($"Folder selected from drag-drop: {path}");
-                lstLog.Items.Add("Ready to clean...");
+            lstLog.Items.Add($"Folder selected from drag-drop: {folder}");
+            lstLog.Items.Add("Ready to clean...");
 
-                if (ckbAutoOpen.Checked)
-                    btnClean.PerformClick();
+            // A drop always cleans; the checkbox only decides whether the folder is
+            // opened afterwards.
+            btnClean.PerformClick();
 
-                return;
-            }
+            if (ckbAutoOpen.Checked)
+                Process.Start("explorer.exe", folder);
 
-            // File dropped → use its folder
-            if (File.Exists(path))
-            {
-                string folder = Path.GetDirectoryName(path);
-                txtFolder.Text = folder;
-
-                lstLog.Items.Add($"Folder selected from drag-drop: {folder}");
-                lstLog.Items.Add("Ready to clean...");
-
-                if (ckbAutoOpen.Checked)
-                    btnClean.PerformClick();
-            }
+            ExitAfterDrop();
         }
 
         private void picDragDrop_DragEnter(object sender, DragEventArgs e)
@@ -280,6 +402,18 @@ namespace MOTW_Cleaner
             Cursor.Current = Cursors.WaitCursor;
             return new ActionOnDispose(() => Cursor.Current = Cursors.Default);
         }
+
+        /// <summary>
+        /// A drop that launched the app is a one-shot job: close the window once the
+        /// work is done (or the dropped path is gone) instead of leaving it open.
+        /// </summary>
+        private void ExitAfterDrop()
+        {
+            if (closeAfterDrop && !IsDisposed)
+                BeginInvoke(new Action(Close));
+        }
+
+
 
         private class ActionOnDispose : IDisposable
         {

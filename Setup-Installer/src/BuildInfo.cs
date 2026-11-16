@@ -4,7 +4,7 @@ namespace MotwSetup
     {
         public const string ProductName = "MOTW Cleaner";
         public const string ProductTag = "Mark-of-the-Web Cleaner";
-        public const string Version = "1.3.1.0";
+        public const string Version = "1.3.2.0";
         public const string Publisher = "Dwain Snickles";
         public const string Url = "https://github.com/DwainSnickles/MOTW-Cleaner";
 

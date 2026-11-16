@@ -13,8 +13,28 @@ namespace MOTW_Cleaner
     /// </summary>
     public partial class frmMOTW
     {
-        private const string ConfigFileName = "MOTW-Cleaner-Portable.json";
-        private static string ConfigPath => Path.Combine(AppContext.BaseDirectory, ConfigFileName);
+        private const string ConfigFileName = "settings.json";
+        private const string LegacyConfigFileName = "MOTW-Cleaner-Portable.json";
+
+        /// <summary>
+        /// Settings live under %APPDATA%\MOTW Cleaner so nothing is written next to
+        /// the exe (which, when the exe sits on the Desktop, meant a file appearing
+        /// on the Desktop).
+        /// </summary>
+        private static string ConfigPath
+        {
+            get
+            {
+                string dir = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                    "MOTW Cleaner");
+
+                Directory.CreateDirectory(dir);
+                return Path.Combine(dir, ConfigFileName);
+            }
+        }
+
+        private static string LegacyConfigPath => Path.Combine(AppContext.BaseDirectory, LegacyConfigFileName);
 
         private class PortableConfig
         {
@@ -38,13 +58,24 @@ namespace MOTW_Cleaner
 
         private void LoadPortableConfig()
         {
+            // Read the current location, falling back to the old file that used to
+            // sit next to the exe so existing settings are not lost.
+            string configPath = ConfigPath;
+            bool fromLegacyPath = false;
+
+            if (!File.Exists(configPath) && File.Exists(LegacyConfigPath))
+            {
+                configPath = LegacyConfigPath;
+                fromLegacyPath = true;
+            }
+
             PortableConfig cfg;
             try
             {
-                if (!File.Exists(ConfigPath))
+                if (!File.Exists(configPath))
                     return;
 
-                cfg = JsonSerializer.Deserialize<PortableConfig>(File.ReadAllText(ConfigPath));
+                cfg = JsonSerializer.Deserialize<PortableConfig>(File.ReadAllText(configPath));
                 if (cfg == null)
                     return;
             }
@@ -72,6 +103,21 @@ namespace MOTW_Cleaner
             // Set last so TextChanged moves it to the top of the recent list.
             if (!string.IsNullOrWhiteSpace(cfg.LastFolder))
                 txtFolder.Text = cfg.LastFolder;
+
+            // Migrated from the old beside-the-exe file: remove it so it stops
+            // appearing next to the app (or on the Desktop).
+            if (fromLegacyPath)
+            {
+                try
+                {
+                    File.Delete(LegacyConfigPath);
+                    lstLog.Items.Add($"Settings moved to {ConfigPath}");
+                }
+                catch
+                {
+                    // Leave it alone if it cannot be removed.
+                }
+            }
         }
 
         private void SavePortableConfig()

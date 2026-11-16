@@ -14,7 +14,7 @@ try {
     }
 
     $wix = (Get-Command wix).Source
-    $version = "1.3.1.0"
+    $version = "1.3.2.0"
 
     if ($PayloadPath -eq "") {
         $candidates = @(
