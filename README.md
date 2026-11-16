@@ -7,11 +7,13 @@
 
 [![View What's New](https://img.shields.io/badge/Whats%20New-HTML-blue?style=for-the-badge)](https://dwainsnickles.github.io/MOTW-Cleaner/)
 
-## 📥 Download and Install MOTW Cleaner Version 1.2 on your Windows PC.
+## 📥 Download and Install MOTW Cleaner Version 1.3.1.0 on your Windows PC.
 
-<a href="https://github.com/DwainSnickles/MOTW-Cleaner/releases/download/1.3.0/MOTW.Installer.msi">
-  <img src="https://img.shields.io/badge/Download-MOTW_Cleaner-blue?style=for-the-badge">
+<a href="https://github.com/DwainSnickles/MOTW-Cleaner/releases/download/1.3.1.0/MOTW.Installer.msi">
+  <img src="https://img.shields.io/badge/Download-MOTW_Cleaner_MSI-blue?style=for-the-badge">
 </a>
+
+Windows Installer package (`.msi`) — installs for all users into `Program Files`, adds Start menu and desktop shortcuts, and registers in Apps & features.
 
 ## 📦 Portable Version — no install required
 

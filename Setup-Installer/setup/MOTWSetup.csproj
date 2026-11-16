@@ -1,0 +1,61 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <LangVersion>latest</LangVersion>
+
+    <RootNamespace>MotwSetup</RootNamespace>
+    <AssemblyName>MOTW Setup</AssemblyName>
+    <Product>MOTW Cleaner Setup</Product>
+    <Company>Dwain Snickles</Company>
+    <Copyright>Copyright (c) 2026 Dwain Snickles</Copyright>
+    <Version>1.3.1.0</Version>
+    <FileVersion>1.3.1.0</FileVersion>
+    <AssemblyVersion>1.3.1.0</AssemblyVersion>
+
+    <ApplicationIcon>..\assets\motw.ico</ApplicationIcon>
+    <ApplicationManifest>..\app.manifest</ApplicationManifest>
+
+    <Deterministic>true</Deterministic>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <NoWarn>$(NoWarn);CS0649</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <DefineConstants>SETUP;DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' != 'Debug'">
+    <DefineConstants>SETUP;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <!-- The application that gets installed. Override with /p:PayloadPath=... when the portable
+       build lives somewhere else. -->
+  <PropertyGroup>
+    <PayloadPath Condition="'$(PayloadPath)' == '' and Exists('..\..\MOTW Portable\publish\MOTW-Cleaner-Portable.exe')">..\..\MOTW Portable\publish\MOTW-Cleaner-Portable.exe</PayloadPath>
+    <PayloadPath Condition="'$(PayloadPath)' == '' and Exists('..\..\MOTW-Cleaner-Portable\publish\MOTW-Cleaner-Portable.exe')">..\..\MOTW-Cleaner-Portable\publish\MOTW-Cleaner-Portable.exe</PayloadPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\src\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="$(PayloadPath)" LogicalName="MOTWSetup.payload.bin"
+                      Condition="'$(PayloadPath)' != '' and Exists('$(PayloadPath)')" />
+    <EmbeddedResource Include="..\artifacts\MOTW Cleaner Uninstall.exe" LogicalName="MOTWSetup.uninstaller.bin"
+                      Condition="Exists('..\artifacts\MOTW Cleaner Uninstall.exe')" />
+    <EmbeddedResource Include="..\assets\motw.ico" LogicalName="MOTWSetup.icon.ico" />
+  </ItemGroup>
+
+  <Target Name="PayloadCheck" BeforeTargets="PrepareForBuild" Condition="'$(PayloadPath)' == ''">
+    <Error Text="Setup payload not found. Build 'MOTW Portable' first, or pass /p:PayloadPath=&lt;path to MOTW-Cleaner-Portable.exe&gt;." />
+  </Target>
+
+  <Target Name="UninstallerCheck" BeforeTargets="PrepareForBuild" Condition="!Exists('..\artifacts\MOTW Cleaner Uninstall.exe')">
+    <Warning Text="Uninstaller module not built yet. Run build.ps1 so the uninstaller is compiled and embedded." />
+  </Target>
+
+</Project>

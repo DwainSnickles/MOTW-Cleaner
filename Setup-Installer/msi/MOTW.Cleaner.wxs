@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+
+  <!--
+    MOTW Cleaner MSI.
+
+    Build with:
+      wix build msi\MOTW.Cleaner.wxs -ext WixToolset.UI.wixext -arch x64 ^
+          -d PayloadPath="..\MOTW Portable\publish\MOTW-Cleaner-Portable.exe" ^
+          -o MOTW.Installer.msi
+
+    or simply run build-msi.ps1, which resolves the payload path for you.
+  -->
+
+  <Package Name="MOTW Cleaner"
+           Manufacturer="Dwain Snickles"
+           Version="1.3.1.0"
+           UpgradeCode="{E5A7B8C9-1D2E-4F3A-9B4C-6D8E0F2A4B50}"
+           Scope="perMachine"
+           Compressed="yes"
+           Language="1033">
+
+    <SummaryInformation Description="MOTW Cleaner setup - unblock Mark of the Web on downloaded files"
+                        Manufacturer="Dwain Snickles" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of MOTW Cleaner is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Icon Id="MOTW.ico" SourceFile="assets\motw.ico" />
+    <Property Id="ARPPRODUCTICON" Value="MOTW.ico" />
+    <Property Id="ARPHELPLINK" Value="https://github.com/DwainSnickles/MOTW-Cleaner" />
+    <Property Id="ARPURLINFOABOUT" Value="https://github.com/DwainSnickles/MOTW-Cleaner" />
+    <Property Id="ARPCONTACT" Value="dwainsnickles@hotmail.com" />
+
+    <WixVariable Id="WixUIBannerBmp" Value="msi\assets\banner.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="msi\assets\dialog.bmp" />
+    <WixVariable Id="WixUILicenseRtf" Value="msi\assets\license.rtf" />
+
+    <ui:WixUI Id="WixUI_InstallDir" InstallDirectory="INSTALLDIR" />
+
+    <StandardDirectory Id="ProgramFiles6432Folder">
+      <Directory Id="INSTALLDIR" Name="MOTW Cleaner">
+        <Component Id="ApplicationFiles" Guid="{A1C0F3D2-6E4B-4B7A-9F3C-2D5E8B1A7C10}">
+          <File Id="ApplicationExe"
+                Source="$(var.PayloadPath)"
+                Name="MOTW Cleaner.exe"
+                KeyPath="yes" />
+        </Component>
+      </Directory>
+    </StandardDirectory>
+
+    <StandardDirectory Id="ProgramMenuFolder">
+      <Directory Id="ApplicationProgramsFolder" Name="MOTW Cleaner">
+        <Component Id="StartMenuShortcut" Guid="{B2D4E5F6-7A8B-4C9D-8E1F-3A5B7C9D1E20}">
+          <Shortcut Id="StartMenuLink"
+                    Name="MOTW Cleaner"
+                    Description="Unblock Mark of the Web on downloaded files"
+                    Target="[INSTALLDIR]MOTW Cleaner.exe"
+                    WorkingDirectory="INSTALLDIR"
+                    Icon="MOTW.ico" />
+          <RemoveFolder Id="RemoveApplicationProgramsFolder" On="uninstall" />
+          <RegistryValue Root="HKLM" Key="Software\MOTW Cleaner" Name="StartMenuShortcut"
+                         Type="integer" Value="1" KeyPath="yes" />
+        </Component>
+      </Directory>
+    </StandardDirectory>
+
+    <StandardDirectory Id="DesktopFolder">
+      <Component Id="DesktopShortcut" Guid="{C3E5F6A7-8B9C-4D1E-9F2A-4B6C8D0E2F30}">
+        <Shortcut Id="DesktopLink"
+                  Name="MOTW Cleaner"
+                  Description="Unblock Mark of the Web on downloaded files"
+                  Target="[INSTALLDIR]MOTW Cleaner.exe"
+                  WorkingDirectory="INSTALLDIR"
+                  Icon="MOTW.ico" />
+        <RegistryValue Root="HKLM" Key="Software\MOTW Cleaner" Name="DesktopShortcut"
+                       Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </StandardDirectory>
+
+    <Component Id="AppPaths" Directory="INSTALLDIR" Guid="{D4F6A7B8-9C1D-4E2F-8A3B-5C7D9E1F3A40}">
+      <RegistryKey Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\App Paths\MOTW Cleaner.exe">
+        <RegistryValue Type="string" Value="[INSTALLDIR]MOTW Cleaner.exe" />
+        <RegistryValue Name="Path" Type="string" Value="[INSTALLDIR]" />
+      </RegistryKey>
+    </Component>
+
+    <Feature Id="MainFeature" Title="MOTW Cleaner" Level="1">
+      <ComponentRef Id="ApplicationFiles" />
+      <ComponentRef Id="StartMenuShortcut" />
+      <ComponentRef Id="DesktopShortcut" />
+      <ComponentRef Id="AppPaths" />
+    </Feature>
+
+  </Package>
+</Wix>
