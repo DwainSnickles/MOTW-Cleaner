@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="MOTW Cleaner.csproj" Id="c01e9e59-55c3-4cf7-8293-4a5e2faf755c" />
+  <Project Path="MOTW Portable\MOTW-Cleaner-Portable\MOTW-Cleaner-Portable.csproj" Id="8acaeb9a-54d5-47c1-b080-5922242fe944" />
 </Solution>

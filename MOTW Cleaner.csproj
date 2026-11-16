@@ -120,5 +120,9 @@
     <None Include="Resources\Browse.png" />
     <Content Include="Updates.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MOTW Portable\" />
+    <Folder Include="Setup-Installer\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

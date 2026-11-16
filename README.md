@@ -13,6 +13,14 @@
   <img src="https://img.shields.io/badge/Download-MOTW_Cleaner-blue?style=for-the-badge">
 </a>
 
+## 📦 Portable Version — no install required
+
+<a href="https://github.com/DwainSnickles/MOTW-Cleaner/releases/download/1.3.1.0/MOTW-Cleaner-Portable.zip">
+  <img src="https://img.shields.io/badge/Download-Portable-green?style=for-the-badge">
+</a>
+
+Single self-contained `.exe` — unzip and run on any Windows PC, no .NET install needed. Settings and recent folders are stored in a JSON file next to the exe.
+
 # MOTW Cleaner
 
 💡![MOTW Cleaner UI](images/page1.png)
