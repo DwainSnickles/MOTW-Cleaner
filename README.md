@@ -57,3 +57,9 @@ Each drop also triggers one background check of the published version, so a newe
 💡![MOTW Cleaner UI](images/page10.png)
 
 💡![MOTW Cleaner UI](images/page11.png)
+
+## Support this project
+
+If this project saved you some time, you can leave a tip at
+[ko-fi.com/dwainhsnickles](https://ko-fi.com/dwainhsnickles) (cards, no account needed) or
+[paypal.me/YTDPlatinum](https://paypal.me/YTDPlatinum). Bug reports and pull requests are welcome too.
